@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/security 
+			http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	
+	<!-- This is where we configure Spring-Security  -->
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/services/auth/denied" >
+	
+		<security:intercept-url pattern="/services/auth/login" access="permitAll"/>
+		<security:intercept-url pattern="/services/main/admin" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/services/main/common" access="hasRole('ROLE_USER')"/>
+		
+		<!-- Adding the openid-login tag activates Spring Security's support for OpenID  -->
+		<security:openid-login
+				login-page="/services/auth/login" 
+				authentication-failure-url="/services/auth/login?error=true" 
+				default-target-url="/services/main/common">
+				
+			<security:attribute-exchange identifier-match=".*myopenid.com.*">
+                <security:openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true"/>
+                <security:openid-attribute name="fullname" type="http://schema.openid.net/namePerson" required="true"/>
+            </security:attribute-exchange>
+            <security:attribute-exchange identifier-match="https://www.google.com/accounts/o8/id">
+                <security:openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
+                <security:openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
+                <security:openid-attribute name="lastname" type="http://axschema.org/namePerson/last" required="true" />
+            </security:attribute-exchange>
+            <security:attribute-exchange identifier-match=".*yahoo.com.*">
+                <security:openid-attribute name="email" type="http://axschema.org/contact/email" required="true"/>
+                <security:openid-attribute name="fullname" type="http://axschema.org/namePerson" required="true" />
+            </security:attribute-exchange>
+  
+		</security:openid-login>
+			
+		<security:logout 
+				invalidate-session="true" 
+				logout-success-url="/services/auth/login" 
+				logout-url="/services/auth/logout"/>
+	
+	</security:http>
+	
+	<!-- Declare an authentication-manager to use a custom userDetailsService -->
+	<security:authentication-manager>
+	        <security:authentication-provider user-service-ref="userDetailsService">
+	        		<security:password-encoder ref="passwordEncoder"/>
+	        </security:authentication-provider>
+	</security:authentication-manager>
+	
+	<!-- Use a Md5 encoder since the user's passwords are stored as Md5 in the database -->
+	<bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder"/>
+
+	 <!-- An in-memory list of users. No need to access an external database layer.
+		    See Spring Security 3.1 Reference 5.2.1 In-Memory Authentication -->
+	 <!-- <security:user-service id="userDetailsService">
+	 	user name is based on the returned OpenID identifier from Google
+	 	<security:user name="https://me.yahoo.com/cnuvasum#d3c87" password="" authorities="ROLE_USER" />
+	    <security:user name="https://www.google.com/accounts/o8/id?id=AItOawmZ_u7mNJXo1p9R1faOlj0H9Gh8C8D1Vm8" password="" authorities="ROLE_USER" />	    
+	    <security:user name="https://www.google.com/accounts/o8/id?id=*" password="" authorities="ROLE_USER" />
+	 </security:user-service> -->
+
+	<bean id="userDetailsService" class=" com.idtracks.gauges.utils.OpenIdUserDetailsService"/>
+</beans>
+
+
