@@ -38,7 +38,7 @@
 			
 		<security:logout 
 				invalidate-session="true" 
-				logout-success-url="/services/auth/login" 
+				logout-success-url="/" 
 				logout-url="/services/auth/logout"/>
       
 	</security:http>

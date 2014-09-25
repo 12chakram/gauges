@@ -3,12 +3,16 @@
  */
 package com.idtracks.gauges.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +73,7 @@ public class AuthController {
 		
 		signupUser.setEmail(userdto.getEmail());
 		signupUser.setUserName(userdto.getUserName());
-		signupUser.setPassword(userdto.getPassword());
+		signupUser.setPassword(userdto.getCnfpassword());
 		
 		  String result = userService.addUser(signupUser);
 		
@@ -90,15 +94,25 @@ public class AuthController {
 	public ModelAndView loginProcess (@ModelAttribute ("userAttribute") UserDTO user, HttpServletRequest request){
 		
 		ModelAndView model =null;
-    	User loggedInUser = userService.getUser(user.getUserName(),user.getPassword());
+    	User loggedInUser = userService.getUser(user.getUserName(),user.getLoginpwd());
     	
     	if(loggedInUser!=null){
     		model = new  ModelAndView("dashboard");
     	}else{
-    		model = new  ModelAndView("/");
+    		final String errormsg = "Invalid UserName or Password";
+    		model = new  ModelAndView("signin");
+    		model.addObject("errormsg", errormsg);
     	}
     	return model;
 	}
+	
+	 @RequestMapping(value = "/logout", method = RequestMethod.GET)
+	    public String logout(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	    	logger.debug("Received request to logout from  portal");
+	    	HttpSession session = request.getSession();
+	    	session.invalidate();
+	    	return "/";
+		}
 }
 
 

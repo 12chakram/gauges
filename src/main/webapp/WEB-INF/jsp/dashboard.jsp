@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%String context=request.getContextPath();%>
+<%String server =  request.getServerName(); %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <jsp:include page="../../static.jsp"></jsp:include>
 	<head>
@@ -302,7 +306,7 @@
 						<!-- #section:basics/navbar.user_menu -->
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="../assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="../../assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
 									Jason
@@ -329,7 +333,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="<%=context%>/services/auth/logout"">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -1522,7 +1526,7 @@
 															<div class="clearfix">
 																<div class="itemdiv memberdiv">
 																	<div class="user">
-																		<img alt="Bob Doe's avatar" src="../assets/avatars/user.jpg" />
+																		<img alt="Bob Doe's avatar" src="../../assets/avatars/user.jpg" />
 																	</div>
 
 																	<div class="body">
@@ -2049,7 +2053,7 @@
 
 														<div class="itemdiv dialogdiv">
 															<div class="user">
-																<img alt="Bob's Avatar" src="../assets/avatars/user.jpg" />
+																<img alt="Bob's Avatar" src="../../assets/avatars/user.jpg" />
 															</div>
 
 															<div class="body">

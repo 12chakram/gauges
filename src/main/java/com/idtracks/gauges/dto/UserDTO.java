@@ -4,13 +4,15 @@ public class UserDTO {
 
 	private String uid;
 	private String userName;
-	private String password;
+	private String secpassword;
 	private String email;
 	private String cnfpassword;
 	private String openId;
 	private String fullName;
 	private boolean userFindByEmail;
 	private boolean accept;
+	private String loginpwd;
+	
 	
 	
 	public String getUid() {
@@ -25,11 +27,12 @@ public class UserDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassword() {
-		return password;
+	
+	public String getSecpassword() {
+		return secpassword;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSecpassword(String secpassword) {
+		this.secpassword = secpassword;
 	}
 	public String getEmail() {
 		return email;
@@ -67,6 +70,12 @@ public class UserDTO {
 	}
 	public void setAccept(boolean accept) {
 		this.accept = accept;
+	}
+	public String getLoginpwd() {
+		return loginpwd;
+	}
+	public void setLoginpwd(String loginpwd) {
+		this.loginpwd = loginpwd;
 	}
 	
 	

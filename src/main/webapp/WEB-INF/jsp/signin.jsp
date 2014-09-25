@@ -21,10 +21,10 @@
 							<div class="center">
 								<h1>
 									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white" id="id-text2">Application</span>
+									<span class="red">idTracks</span>
+									<span class="white" id="id-text2">Gauges</span>
 								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+								<h4 class="blue" id="id-company-text">&copy; Health Dox</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -41,11 +41,14 @@
 											<div class="space-6"></div>
 											 <c:url var="loginurl" value="/services/auth/doLogin" />
 											  <form:form modelAttribute="userAttribute" method="POST" action="${loginurl}"  id="login-form"> 
+											
+								                 <label>	<span class="red">${errormsg}</span>  </label>
+												
 												<fieldset>
 												  <div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<form:input path="userName" type="text" name="userName" id="username"  class="form-control" placeholder="Username" />
+															<form:input path="userName" type="text" name="userName" id="userName"  class="form-control" placeholder="Username" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -53,7 +56,7 @@
 												 <div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<form:password path="password" name="password" id="password"  class="form-control" placeholder="Password" />
+															<form:password path="loginpwd" name="loginpwd" id="loginpwd"  class="form-control" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -172,7 +175,7 @@
 											<div class="space-6"></div>
 											<p> Enter your details to begin: </p>
 										     <c:url var="userRegisterUrl" value="/services/auth/signupProcess" />
-										        <form:form modelAttribute="userAttribute" method="POST" action="${userRegisterUrl}"  autocomplete="off" encoding="multipart/form-data" enctype="multipart/form-data" id="registration-form">
+										        <form:form modelAttribute="userAttribute" method="POST" action="${userRegisterUrl}"  autocomplete="off" id="registration-form">
 												<fieldset>
 												
 												<div class="form-group">
@@ -196,7 +199,7 @@
 												<div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<form:password path="password"  id="reg_password" name="password" class="form-control" placeholder="Password" />
+															<form:password path="secpassword"  id="secpassword" name="secpassword" class="form-control" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -205,7 +208,7 @@
 												<div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<form:password path="password" id="reg_cnf-password" name="cnfpassword" class="form-control" placeholder="Repeat password" />
+															<form:password path="cnfpassword" id="cnfpassword" name="cnfpassword" class="form-control" placeholder="Repeat password" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
 													</label>

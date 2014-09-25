@@ -19,7 +19,7 @@
 					<a href="<%=context%>" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							Ace Admin
+						    idTracks Gauges
 						</small>
 					</a>
 

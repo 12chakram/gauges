@@ -21,9 +21,9 @@
 							required: true,
 							userName:true
 						},
-						password: {
+						loginpwd: {
 							required: true,
-							password:true
+							loginpwd:true
 						},
 						
 					},
@@ -33,9 +33,9 @@
 							required: "Please provide username.",
 							userName: "Please provide username."
 						},
-						password: {
+						loginpwd: {
 							required: "Please provide Password.",
-							username: "Please provide Password."
+							loginpwd: "Please provide Password."
 						},
 						
 					},
@@ -112,18 +112,22 @@
 						},
 						userName: {
 							required: true,
-							reg_username:true
+							userName:true
 						},
-						password: {
+						secpassword: {
 							required: true,
-							reg_password:true
+							secpassword :true,
+							minlength: 5
 						},
 						cnfpassword: {
 							required: true,
-							reg_password:true
+							cnfpassword:true,
+							minlength: 5,
+							equalTo: "#secpassword"
 						},
 						accept: {
 							required: true,
+							accept:true
 						},
 											
 					},
@@ -131,19 +135,20 @@
 					messages: {
 						email: {
 							required: "Please provide Email.",
-							retrieve_email: "Please provide a valid Email."
+							email:"Please provide Email."
 						},
 						userName: {
 							required: "Please provide username.",
-							reg_username:"Please provide username."
+							userName:"Please provide username."
 						},
-						password: {
+						secpassword: {
 							required: "Please provide password.",
-							reg_password:"Please provide password."
+							secpassword:"Please provide password.",
+							minlength: "Please specify a secure password."
 						},
 						cnfpassword: {
 							required: "Please reenter password.",
-							reg_cnf_password:"Please reenter password."
+							cnfpassword:"Please reenter password."
 						},
 						accept: "Please accept our policy"
 																	
@@ -171,9 +176,5 @@
 				
 			})
 			
-			function formvalidation(){
-    	 
-    	 
-     }
-			
+		
 	
