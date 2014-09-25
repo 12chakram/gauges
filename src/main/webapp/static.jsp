@@ -33,41 +33,31 @@
 		<![endif]-->
 		<link rel="stylesheet" href="<%=context %>/assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<%=context %>/assets/css/ace-rtl.min.css" />
-
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- inline styles related to this page -->
+				
 
 		<!-- ace settings handler -->
 		<script src="<%=context %>/assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-		<!--[if lte IE 8]>
-		<script src="/assets/js/html5shiv.min.js"></script>
-		<script src="/assets/js/respond.min.js"></script>
-		<![endif]-->
-	
-				
+		
 		<!-- basic scripts -->
+		
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
+		</script>
 
 		<!--[if !IE]> -->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='<%=context %>/assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
 
-		<!-- <![endif]-->
 
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='/assets/js/jquery1x.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='./assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
+		
+		
+		
 		<script src="<%=context %>/assets/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
@@ -95,6 +85,21 @@
 		<script src="<%=context %>/assets/js/bootbox.min.js"></script>
 		<script src="<%=context %>/assets/js/jquery.maskedinput.min.js"></script>
 		<script src="<%=context %>/assets/js/select2.min.js"></script>
+	
+			
+		<script src="../assets/js/jquery-ui.custom.min.js"></script>
+		<script src="<%=context %>/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="<%=context %>/assets/js/jquery.easypiechart.min.js"></script>
+		<script src="<%=context %>/assets/js/jquery.sparkline.min.js"></script>
+		<script src="<%=context %>/assets/js/flot/jquery.flot.min.js"></script>
+		<script src="<%=context %>/assets/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="<%=context %>/assets/js/flot/jquery.flot.resize.min.js"></script>
+		
+		
+			<!--  Application specific JS -->
+		<script src="<%=context %>/assets/js/app/commonvalidations.js"></script>
+		<script src="<%=context %>/assets/js/app/common.js"></script>
+		<script src="<%=context %>/assets/js/app/dashboard.js"></script>
 		
 		
 		<script type="text/javascript">

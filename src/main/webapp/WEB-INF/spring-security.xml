@@ -16,7 +16,7 @@
 		
 		<!-- Adding the openid-login tag activates Spring Security's support for OpenID  -->
 		<security:openid-login
-				login-page="/services/auth/login" 
+				login-page="/services/auth/" 
 				authentication-failure-url="/services/auth/login?error=true" 
 				default-target-url="/services/main/common">
 				
@@ -40,7 +40,7 @@
 				invalidate-session="true" 
 				logout-success-url="/services/auth/login" 
 				logout-url="/services/auth/logout"/>
-	
+      
 	</security:http>
 	
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->

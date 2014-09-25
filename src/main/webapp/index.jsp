@@ -22,7 +22,7 @@
 
 	<body class="no-skin">
 	
-		<jsp:include page="./template/auth/auth_header.jsp"></jsp:include>
+		<jsp:include page="./template/public/unauth_header.jsp"></jsp:include>
 
 		<!-- /section:basics/navbar.layout -->
 		<div class="main-container" id="main-container">

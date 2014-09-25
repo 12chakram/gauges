@@ -48,16 +48,13 @@ public class UserServiceBean implements UserService  {
 			// Set a new value to the pid property first since it's blank
 			//user.setUid(UUID.randomUUID().toString());
 			// Insert to db
-			User addUser = new User(UUID.randomUUID().toString(),user.getUserName(),user.getPassword(), user.getEmail(),user.getOpenId(),user.getFullName(),user.getLat(),user.getLon(),user.getFirstName(),user.getLastName(),user.getGender(), user.getDob());
+			User addUser = new User(UUID.randomUUID().toString(),user.getUserName(),user.getPassword(), user.getEmail(),user.getOpenId(),user.getFullName(),user.getFirstName(),user.getLastName(),user.getGender(), user.getDob());
 			if(addUser.getOpenId()!=null){
 				addUser.setPassword("");
 				addUser.setGender("");
 				addUser.setDob("");
 			}
-			  mongoTemplate.insert(addUser);
-			  if(addUser.getOpenId()==null){
-			    String businessimg = saveUserProfileImg(user.getBytes(),addUser.getUid(),"userprofileImg");
-			  }
+		     mongoTemplate.insert(addUser);
 			  result = "sucess";
 		  }catch (Exception e) {
 			logger.error("An error has occurred while trying to add new user", e);

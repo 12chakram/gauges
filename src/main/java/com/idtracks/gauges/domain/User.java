@@ -21,8 +21,6 @@ public class User implements Serializable {
 	private String cnfpassword;
 	private String openId;
 	private String fullName;
-	private Double lat;
-	private Double lon;
 	private String firstName;
 	private String lastName;
 	private String gender;
@@ -38,7 +36,7 @@ public class User implements Serializable {
 	  }
 	  
 	  @PersistenceConstructor
-	  public User(String uid,String userName,String password, String email,String openId,String fullName,Double lat,Double lon,String firstName,String lastName,String gender, String dob) {
+	  public User(String uid,String userName,String password, String email,String openId,String fullName,String firstName,String lastName,String gender, String dob) {
 	    super();
 	    this.uid = uid;
 	    this.userName = userName;
@@ -46,15 +44,13 @@ public class User implements Serializable {
 	    this.email = email;
 	    this.openId =openId;
 	    this.fullName = fullName;
-	    this.lat = lat;
-	    this.lon = lon;
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.gender = gender;
 	    this.dob =dob;
 	  }
 	 
-	  public User(String uid,String userName,String password, String email,String openId,String fullName,Double lat,Double lon,String firstName,String lastName,String gender, String dob,String cnfpassword) {
+	  public User(String uid,String userName,String password, String email,String openId,String fullName,String firstName,String lastName,String gender, String dob,String cnfpassword) {
 	    super();
 	    this.uid = uid;
 	    this.userName = userName;
@@ -62,8 +58,6 @@ public class User implements Serializable {
 	    this.email = email;
 	    this.openId =openId;
 	    this.fullName = fullName;
-	    this.lat = lat;
-	    this.lon = lon;
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.gender = gender;
@@ -119,22 +113,6 @@ public class User implements Serializable {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
-	}
-	
-	public Double getLat() {
-		return lat;
-	}
-
-	public void setLat(Double lat) {
-		this.lat = lat;
-	}
-
-	public Double getLon() {
-		return lon;
-	}
-
-	public void setLon(Double lon) {
-		this.lon = lon;
 	}
 
 	public String getFirstName() {
@@ -205,6 +183,6 @@ public class User implements Serializable {
 	@Override
 	  public String toString() {
 	    return "User [uid=" + uid + ", userName=" + userName + ", password="
-	        + password+",email="+email+",openId="+openId+",fullName="+fullName+",lat="+lat+",lon="+lon+"]";
+	        + password+",email="+email+",openId="+openId+",fullName="+fullName+"]";
 	  } 
 }

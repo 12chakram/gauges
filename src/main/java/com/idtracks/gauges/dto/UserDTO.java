@@ -9,9 +9,8 @@ public class UserDTO {
 	private String cnfpassword;
 	private String openId;
 	private String fullName;
-	private Double lat;
-	private Double lon;
 	private boolean userFindByEmail;
+	private boolean accept;
 	
 	
 	public String getUid() {
@@ -56,22 +55,19 @@ public class UserDTO {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
-	public Double getLat() {
-		return lat;
-	}
-	public void setLat(Double lat) {
-		this.lat = lat;
-	}
-	public Double getLon() {
-		return lon;
-	}
-	public void setLon(Double lon) {
-		this.lon = lon;
-	}
+	
 	public boolean isUserFindByEmail() {
 		return userFindByEmail;
 	}
 	public void setUserFindByEmail(boolean userFindByEmail) {
 		this.userFindByEmail = userFindByEmail;
 	}
+	public boolean isAccept() {
+		return accept;
+	}
+	public void setAccept(boolean accept) {
+		this.accept = accept;
+	}
+	
+	
 }

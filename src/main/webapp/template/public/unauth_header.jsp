@@ -44,7 +44,7 @@
 
 					<!-- /section:basics/navbar.toggle -->
 				</div>
-
+			<c:if test="${userAttribute eq null}">
 				<!-- #section:basics/navbar.dropdown -->
 				<div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
 					<ul class="nav ace-nav">
@@ -57,7 +57,7 @@
 								<div class="tabbable">
 									<ul class="nav nav-tabs">
 										<li>
-											<a href="<%=context %>/services/auth/signin" >Sign In</a>
+											<a href="<%=context %>/services/auth/" >Sign In</a>
 										</li>
 
 										<li>
@@ -73,7 +73,7 @@
 						<!-- /section:basics/navbar.user_menu -->
 					</ul>
 				</div>
-				
+			</c:if>	
 				<!-- /section:basics/navbar.dropdown -->
 				<nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
 					<!-- #section:basics/navbar.nav -->

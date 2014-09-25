@@ -3,6 +3,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
 <html lang="en">
 	<head>
@@ -13,25 +16,10 @@
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		
-		<script type="text/javascript">
-		
-			function getOpenIDItem(name) {
-				alert(name);
-				if (name == 'yahoo') {
-					$("#openid_identifier").val("https://me.yahoo.com/");
-					$("#openIDform").submit();
-				}
-				if(name == 'google'){
-					$("#openid_identifier").val("https://www.google.com/accounts/o8/id");
-					$("#openIDform").submit();
-				}
-			}
-		
-		</script>
 	</head>
 
 	<body class="login-layout">
-	   <jsp:include page="../../template/auth/auth_header.jsp"></jsp:include>
+	   <jsp:include page="../../template/public/unauth_header.jsp"></jsp:include>
 		<div class="main-container">
 			<div class="main-content">
 				<div class="row">
@@ -49,7 +37,7 @@
 							<div class="space-6"></div>
 
 							<div class="position-relative">
-								<div id="login-box" class="login-box visible widget-box no-border">
+								<div id="login-box" class="login-box  widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
@@ -58,14 +46,13 @@
 											</h4>
 
 											<div class="space-6"></div>
-
-											<form id="login-form" method="post">
-											
+											 <c:url var="loginurl" value="/services/auth/doLogin" />
+											  <form:form modelAttribute="userAttribute" method="POST" action="${loginurl}"  id="login-form"> 
 												<fieldset>
 												  <div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" name="username" id="username"  class="form-control" placeholder="Username" />
+															<form:input path="userName" type="text" name="userName" id="username"  class="form-control" placeholder="Username" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -73,7 +60,7 @@
 												 <div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" name="password" id="password"  class="form-control" placeholder="Password" />
+															<form:password path="password" name="password" id="password"  class="form-control" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -94,8 +81,9 @@
 
 													<div class="space-4"></div>
 												</fieldset>
-											</form>
-											<c:url var="openIDLoginUrl" value="/j_spring_openid_security_check" />
+											</form:form>
+										
+											<%-- <c:url var="openIDLoginUrl" value="/j_spring_openid_security_check" />
 											     <form action="${openIDLoginUrl}" method="post" target="_blank" id="openIDform">
 											       	<input id="openid_identifier" name="openid_identifier" value="" type="hidden"/>
 											       	<button type="button" class="width-35  btn btn-sm btn-danger" onclick="getOpenIDItem('google');">
@@ -104,7 +92,30 @@
 														</button>
 												 </form>
 
+											<div class="space-6"></div> --%>
+											
+											<div class="social-or-login center">
+												<span class="bigger-110">Or Login Using</span>
+											</div>
+
 											<div class="space-6"></div>
+
+											<div class="social-login center">
+												<a class="btn btn-primary">
+													<i class="ace-icon fa fa-facebook"></i>
+												</a>
+
+												<a class="btn btn-info">
+													<i class="ace-icon fa fa-twitter"></i>
+												</a>
+													<c:url var="openIDLoginUrl" value="/j_spring_openid_security_check" />
+												<a class="btn btn-danger">
+												 <form action="${openIDLoginUrl}" method="post" target="_blank" id="openIDform">
+											       	<input id="openid_identifier" name="openid_identifier" value="" type="hidden"/>
+												 </form>
+													<i class="ace-icon fa fa-google-plus" onclick="getOpenIDItem('google');"></i>
+												</a>
+											</div>
 											
 										</div><!-- /.widget-main -->
 
@@ -168,7 +179,7 @@
 									</div><!-- /.widget-body -->
 								</div><!-- /.forgot-box -->
 
-								<div id="signup-box" class="signup-box widget-box no-border">
+								<div id="signup-box" class="signup-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header green lighter bigger">
@@ -178,15 +189,14 @@
 
 											<div class="space-6"></div>
 											<p> Enter your details to begin: </p>
-										     <c:url var="userRegisterUrl" value="/services/users/register" />
-										     <form:form modelAttribute="userAttribute" method="POST" action="${userRegisterUrl}"  autocomplete="off" encoding="multipart/form-data" enctype="multipart/form-data" id="registration-form">
-										     
+										     <c:url var="userRegisterUrl" value="/services/auth/signupProcess" />
+										        <form:form modelAttribute="userAttribute" method="POST" action="${userRegisterUrl}"  autocomplete="off" encoding="multipart/form-data" enctype="multipart/form-data" id="registration-form">
 												<fieldset>
 												
 												<div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" id="reg_email" name="reg_email" class="form-control" placeholder="Email" />
+															<form:input path="email" type="email" id="reg_email" name="email" class="form-control" placeholder="Email"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
@@ -195,7 +205,7 @@
 												<div class="form-group">			
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" id="reg_username" name="reg_username" class="form-control" placeholder="Username" />
+															<form:input path="userName" type="text" id="reg_username" name="userName" class="form-control" placeholder="Username" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -204,7 +214,7 @@
 												<div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" id="reg_password" name="reg_password" class="form-control" placeholder="Password" />
+															<form:password path="password"  id="reg_password" name="password" class="form-control" placeholder="Password" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -213,7 +223,7 @@
 												<div class="form-group">
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" id="reg_cnf-password" name="reg_cnf_password" class="form-control" placeholder="Repeat password" />
+															<form:password path="password" id="reg_cnf-password" name="cnfpassword" class="form-control" placeholder="Repeat password" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
 													</label>
@@ -221,7 +231,7 @@
 												
 												<div class="form-group">		
 													<label class="block">
-														<input type="checkbox" id="reg_accept" name="reg_accept" class="ace" />
+														<input type="checkbox" id="accept" name="accept" class="ace" />
 														<span class="lbl">
 															I accept the
 															<a href="#">User Agreement</a>
@@ -238,7 +248,6 @@
 
 														<button type="submit" class="width-65 pull-right btn btn-sm btn-success">
 															<span class="bigger-110">Register</span>
-
 															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 														</button>
 													</div>
@@ -262,176 +271,6 @@
 				</div><!-- /.row -->
 			</div><!-- /.main-content -->
 		</div><!-- /.main-container -->
-
 		
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			jQuery(function($) {
-			 $(document).on('click', '.toolbar a[data-target]', function(e) {
-				e.preventDefault();
-				var target = $(this).data('target');
-				$('.widget-box.visible').removeClass('visible');//hide others
-				$(target).addClass('visible');//show target
-			 });
-			
-										
-				$('#login-form').validate({
-					errorElement: 'div',
-					errorClass: 'help-block',
-					focusInvalid: false,
-					rules: {
-						username: {
-							required: true,
-							username:true
-						},
-						password: {
-							required: true,
-							password:true
-						},
-						
-					},
-			
-					messages: {
-						username: {
-							required: "Please provide username.",
-							username: "Please provide username."
-						},
-						password: {
-							required: "Please provide Password.",
-							username: "Please provide Password."
-						},
-						
-					},
-			
-			
-					highlight: function (e) {
-						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-					},
-			
-					success: function (e) {
-						$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-						$(e).remove();
-					},
-			
-					errorPlacement: function (error, element) {
-						   error.insertAfter(element.parent());
-					},
-			
-					submitHandler: function (form) {
-					},
-					invalidHandler: function (form) {
-					}
-				});
-				
-				$('#retrieve-form').validate({
-					errorElement: 'div',
-					errorClass: 'help-block',
-					focusInvalid: false,
-					rules: {
-						retrieve_email: {
-							required: true,
-							email:true
-						},
-											
-					},
-			
-					messages: {
-						retrieve_email: {
-							required: "Please provide Email.",
-							retrieve_email: "Please provide a valid Email."
-						},
-											
-					},
-			
-			
-					highlight: function (e) {
-						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-					},
-			
-					success: function (e) {
-						$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-						$(e).remove();
-					},
-			
-					errorPlacement: function (error, element) {
-						   error.insertAfter(element.parent());
-					},
-			
-					submitHandler: function (form) {
-					},
-					invalidHandler: function (form) {
-					}
-				});
-				
-				
-				
-				
-				$('#registration-form').validate({
-					errorElement: 'div',
-					errorClass: 'help-block',
-					focusInvalid: false,
-					rules: {
-						reg_email: {
-							required: true,
-							email:true
-						},
-						reg_username: {
-							required: true,
-							reg_username:true
-						},
-						reg_password: {
-							required: true,
-							reg_password:true
-						},
-						reg_cnf_password: {
-							required: true,
-							reg_password:true
-						},
-											
-					},
-			
-					messages: {
-						reg_email: {
-							required: "Please provide Email.",
-							retrieve_email: "Please provide a valid Email."
-						},
-						reg_username: {
-							required: "Please provide username.",
-							reg_username:"Please provide username."
-						},
-						reg_password: {
-							required: "Please provide password.",
-							reg_password:"Please provide password."
-						},
-						reg_cnf_password: {
-							required: "Please reenter password.",
-							reg_cnf_password:"Please reenter password."
-						},
-																	
-					},
-			
-			
-					highlight: function (e) {
-						$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-					},
-			
-					success: function (e) {
-						$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-						$(e).remove();
-					},
-			
-					errorPlacement: function (error, element) {
-						   error.insertAfter(element.parent());
-					},
-			
-					submitHandler: function (form) {
-					},
-					invalidHandler: function (form) {
-					}
-				});
-				
-			})
-			
-		</script>
 	</body>
 </html>
